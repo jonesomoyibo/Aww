@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="UnusedIds">
+    <item
+        android:id="@+id/navigation_post_nav_graph"
+        android:icon="@drawable/ic_list"
+        android:title="@string/home_tab_posts" />
+    <item
+        android:id="@+id/navigation_post_favourite_graph"
+        android:icon="@drawable/ic_favourite"
+        android:title="@string/home_tab_favorites" />
+</menu>

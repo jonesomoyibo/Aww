@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_post_favourite_graph"
+    app:startDestination="@id/favouritePostsFragment">
+
+    <fragment
+        android:id="@+id/favouritePostsFragment"
+        android:name="com.capiter.android.favourite_posts_list.FavouritePostsFragment"
+        android:label="Favourite Posts" />
+</navigation>

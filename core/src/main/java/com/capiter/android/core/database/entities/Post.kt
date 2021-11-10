@@ -7,8 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "posts")
 data class Post(
     @PrimaryKey
-    val id:Int,
+    val id:String,
     val title:String,
-    val isFavourite:Boolean,
-    val imageUrl:String,
-    val iconUrl:String)
+    val thumbnailUrl: String,
+    val isVideo: Boolean)

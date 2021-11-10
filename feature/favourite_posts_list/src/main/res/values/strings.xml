@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Character favorite-->
+    <string name="posts_favorite_list_empty_text">Your favorite posts list is empty</string>
+    <string name="posts_favorite_list_item_image_content_description">Image of the current post list</string>
+</resources>

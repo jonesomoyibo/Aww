@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_post_nav_graph"
+    app:startDestination="@id/allPostListFragment">
+    <fragment
+        android:id="@+id/allPostListFragment"
+        android:name="com.capiter.android.all_posts_list.ui.AllPostListFragment"
+        android:label="Posts" />
+</navigation>

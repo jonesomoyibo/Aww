@@ -1,6 +1,6 @@
 package com.capiter.android.core.di.modules
 
-import com.capiter.android.core.network.repositories.AwwRepository
+import com.capiter.android.core.network.repositories.AllPostListRepository
 import com.capiter.android.core.network.services.AwwServices
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
@@ -13,14 +13,15 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-class NetworkModule {
 
-    @Module
-    class NetworkModule(private val baseUrl:String) {
+@Module
+class NetworkModule(private val baseUrl:String) {
+
+
 
         @Provides
         @Singleton
-        fun provideGson(): Gson {
+        fun providesGson(): Gson {
             val gsonBuilder = GsonBuilder()
             gsonBuilder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
             return gsonBuilder.create()
@@ -28,7 +29,7 @@ class NetworkModule {
 
         @Provides
         @Singleton
-        fun provideRetrofit(gson: Gson, okHttpClient: OkHttpClient): Retrofit {
+        fun providesRetrofit(gson: Gson, okHttpClient: OkHttpClient): Retrofit {
             return Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .baseUrl(baseUrl)
@@ -38,7 +39,7 @@ class NetworkModule {
 
         @Provides
         @Singleton
-        fun provideHttpInterceptor(): HttpLoggingInterceptor {
+        fun providesHttpInterceptor(): HttpLoggingInterceptor {
             val httpLoggingInterceptor = HttpLoggingInterceptor()
             httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
             return httpLoggingInterceptor
@@ -49,18 +50,17 @@ class NetworkModule {
         fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
             return OkHttpClient.Builder()
                 .addInterceptor(httpLoggingInterceptor)
-                .build()}
-
-
-        @Provides
-        @Singleton
-        fun provideSwapApiService(retrofit: Retrofit): AwwServices {
-            return retrofit.create(AwwServices::class.java)
+                .build()
         }
 
-        @Singleton
+
         @Provides
-        fun providePixabayRepository(service: AwwServices) = AwwRepository(service)
+        @Singleton
+        fun providesAwwService(retrofit: Retrofit): AwwServices = retrofit.create(AwwServices::class.java)
+
+
+        @Provides
+        @Singleton
+        fun providesAwwRepository(service: AwwServices) = AllPostListRepository(service)
 
     }
-}

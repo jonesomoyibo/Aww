@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--posts favorite-->
+    <dimen name="all_posts_list_item_size">200dp</dimen>
+    <dimen name="all_posts_list_item_text_padding">10dp</dimen>
+    <dimen name="all_posts_list_item_padding">10dp</dimen>
+    <dimen name="all_posts_list_item_corner_radius">5dp</dimen>
+
+    <!--posts list-->
+    <dimen name="all_posts_list_loading_size">50dp</dimen>
+    <dimen name="all_posts_list_item_elevation">5dp</dimen>
+    <dimen name="all_posts_item_size">140dp</dimen>
+    <dimen name="all_posts_item_padding">10dp</dimen>
+    <dimen name="all_posts_item_text_padding">10dp</dimen>
+    <dimen name="all_posts_item_loading_size">30dp</dimen>
+    <dimen name="all_posts_item_loading_padding">10dp</dimen>
+    <dimen name="all_posts_item_error_padding">10dp</dimen>
+    <dimen name="all_posts_item_error_button_top_margin">5dp</dimen>
+</resources>
