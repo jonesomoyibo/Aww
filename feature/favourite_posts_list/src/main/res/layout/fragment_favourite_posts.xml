@@ -22,7 +22,11 @@
         <include
             android:id="@+id/include_list_empty"
             layout="@layout/view_post_favourite_list_empty"
-            bind:viewState="@{viewModel.state}"/>
+            bind:layout_constraintBottom_toBottomOf="parent"
+            bind:layout_constraintEnd_toEndOf="parent"
+            bind:layout_constraintStart_toStartOf="parent"
+            bind:layout_constraintTop_toTopOf="parent"
+            bind:viewState="@{viewModel.state}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

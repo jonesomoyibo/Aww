@@ -3,8 +3,8 @@ package com.capiter.android.all_posts_list.ui
 
 import androidx.lifecycle.*
 import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import com.capiter.android.all_posts_list.ui.model.PostItem
-import com.capiter.android.all_posts_list.ui.model.PostItemMapper
 import com.capiter.android.all_posts_list.ui.paging.PAGE_MAX_ELEMENTS
 import com.capiter.android.all_posts_list.ui.paging.PostPageDataSourceFactory
 import com.capiter.android.core.database.entities.Post
@@ -14,44 +14,46 @@ import com.capiter.android.ui.livedata.SingleLiveData
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class AllPostListViewModel
+class PostListViewModel
 @Inject constructor(
-    val dataSourceFactory: PostPageDataSourceFactory,
-    val favouritePostsRepository: FavouritePostsRepository
+    private val dataSourceFactory: PostPageDataSourceFactory,
+    private val favouritePostsRepository: FavouritePostsRepository
 ) : ViewModel() {
 
 
-    private val _viewState = MutableLiveData<AllPostsListViewState>()
-    val viewState: LiveData<AllPostsListViewState>
-        get() = _viewState
+    private val _favouriteIconViewState = SingleLiveData<FavouriteIconViewState>()
+    val favouriteIconViewState: LiveData<FavouriteIconViewState>
+        get() = _favouriteIconViewState
 
-    val networkState = Transformations.switchMap(dataSourceFactory.sourceLiveData) {
+     val addToFavouritePostsEvent = SingleLiveData<AddPostToFavouriteEvent>()
+
+
+    private val networkState = Transformations.switchMap(dataSourceFactory.sourceLiveData) {
         it.networkState
     }
 
-    val event = SingleLiveData<PostListViewEvent>()
-    val data = LivePagedListBuilder(dataSourceFactory, PAGE_MAX_ELEMENTS).build()
+    val data = LivePagedListBuilder(dataSourceFactory, PagedList.Config.Builder().setPageSize(PAGE_MAX_ELEMENTS).build()).build()
     val state = Transformations.map(networkState) {
         when (it) {
             is NetworkState.Success ->
                 if (it.isAdditional && it.isEmptyResponse) {
-                    AllPostsListViewState.NoMoreElements
+                    PostsListViewState.NoMoreElements
                 } else if (it.isEmptyResponse) {
-                    AllPostsListViewState.Empty
+                    PostsListViewState.Empty
                 } else {
-                    AllPostsListViewState.Loaded
+                    PostsListViewState.Loaded
                 }
             is NetworkState.Loading ->
                 if (it.isAdditional) {
-                    AllPostsListViewState.AddLoading
+                    PostsListViewState.AddLoading
                 } else {
-                    AllPostsListViewState.Loading
+                    PostsListViewState.Loading
                 }
             is NetworkState.Error ->
                 if (it.isAdditional) {
-                    AllPostsListViewState.AddError
+                    PostsListViewState.AddError
                 } else {
-                    AllPostsListViewState.Error
+                    PostsListViewState.Error
                 }
 
         }
@@ -76,23 +78,23 @@ class AllPostListViewModel
     }
 
 
-//    fun openPostDetail(characterId: Long) {
-//        event.postValue(PostListViewEvent.OpenPostDetail(characterId))
-//    }
-
 
     /**
-     * Store selected character to database favorite list.
+     * emit AddPostToFavouriteEvent
      */
-    fun addPostToFavorite(postItem: PostItem) {
+    fun emitAddPostToFavoriteEvent(postItem: PostItem) {
+        addToFavouritePostsEvent.postValue(AddPostToFavouriteEvent.AddPostToFavourites(postItem))
+
+    }
+
+
+    fun addPostToFavourites(post:Post){
 
         viewModelScope.launch {
-            favouritePostsRepository.insertPost(
-                Post(postItem.id, postItem.title, postItem.thumbnailUrl, postItem.isVideo)
-            )
-            _viewState.postValue(AllPostsListViewState.AddedToFavourite)
-
+            favouritePostsRepository.insertPost(post)
+            _favouriteIconViewState.postValue(FavouriteIconViewState.AddedToFavorite)
         }
+
     }
 
 }

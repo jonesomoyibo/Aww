@@ -1,6 +1,6 @@
 package com.capiter.android.all_posts_list.ui.di
 
-import com.capiter.android.all_posts_list.ui.AllPostListFragment
+import com.capiter.android.all_posts_list.ui.PostListFragment
 import com.capiter.android.core.di.components.CoreComponent
 import com.capiter.android.core.di.scopes.FeatureScope
 import dagger.Component
@@ -15,5 +15,5 @@ interface AllPostListComponent{
  *
  * @param favoriteFragment Favorite component.
  */
-fun inject(allPostListFragment: AllPostListFragment)
+fun inject(postListFragment: PostListFragment)
 }

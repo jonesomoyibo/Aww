@@ -2,10 +2,9 @@ package com.capiter.android.all_posts_list.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.VisibleForTesting
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.capiter.android.all_posts_list.ui.AllPostListViewModel
+import com.capiter.android.all_posts_list.ui.PostListViewModel
 import com.capiter.android.all_posts_list.ui.adapter.holders.ErrorViewHolder
 import com.capiter.android.all_posts_list.ui.adapter.holders.LoadingViewHolder
 import com.capiter.android.all_posts_list.ui.adapter.holders.PostViewHolder
@@ -18,10 +17,10 @@ import javax.inject.Inject
 /**
  * Enum class containing the different type of cell view, with the configuration.
  */
-internal enum class ItemView(val type: Int, val span: Int) {
-    POST(type = 0, span = 1),
-    LOADING(type = 1, span = 2),
-    ERROR(type = 2, span = 2);
+internal enum class ItemView(val type: Int) {
+    POST(type = 0),
+    LOADING(type = 1),
+    ERROR(type = 2);
 
     companion object {
         fun valueOf(type: Int): ItemView = values().first { it.type == type }
@@ -29,13 +28,13 @@ internal enum class ItemView(val type: Int, val span: Int) {
 }
 
 /**
- * Class for presenting characters List data in a [RecyclerView], including computing
+ * Class for presenting posts List data in a [RecyclerView], including computing
  * diffs between Lists on a background thread.
  *
  * @see BaseListAdapter
  */
 class AllPostListAdapter @Inject constructor(
-    val viewModel: AllPostListViewModel
+    val viewModel: PostListViewModel
 ) : BasePagedListAdapter<PostItem>(
     itemsSame = { old, new -> old.id == new.id },
     contentsSame = { old, new -> old == new }
@@ -85,24 +84,24 @@ class AllPostListAdapter @Inject constructor(
                 if (holder is ErrorViewHolder) {
                     holder.bind(viewModel)
                 }
-            else -> {
-            }
+
+            else -> {}
         }
     }
 
-//    /**
-//     * Return the stable ID for the item at position.
-//     *
-//     * @param position Adapter position to query.
-//     * @return The stable ID of the item at position.
-//     * @see BasePagedListAdapter.getItemId
-//     */
-//    override fun getItemId(position: Int):Long =
-//        when (getItemView(position)) {
-//            ItemView.POST-> getItem(position)?.id ?: -1L
-//            ItemView.LOADING -> 0L
-//            ItemView.ERROR -> 1L
-//        }
+    /**
+     * Return the stable ID for the item at position.
+     *
+     * @param position Adapter position to query.
+     * @return The stable ID of the item at position.
+     * @see BasePagedListAdapter.getItemId
+     */
+    override fun getItemId(position: Int):Long =
+        when (getItemView(position)) {
+            ItemView.POST-> getItem(position)?.gilded?.toLong() ?: -3L
+            ItemView.LOADING -> -1L
+            ItemView.ERROR -> -2L
+        }
 
     /**
      * Returns the total number of items in the data set held by the adapter.
@@ -139,17 +138,6 @@ class AllPostListAdapter @Inject constructor(
         }
     }
 
-    /**
-     * Obtain helper class to provide the number of spans each item occupies.
-     *
-     * @return The helper class.
-     */
-    fun getSpanSizeLookup(): GridLayoutManager.SpanSizeLookup =
-        object : GridLayoutManager.SpanSizeLookup() {
-            override fun getSpanSize(position: Int): Int {
-                return getItemView(position).span
-            }
-        }
 
     /**
      * Obtain the type of view by the item position.
@@ -157,14 +145,15 @@ class AllPostListAdapter @Inject constructor(
      * @param position Current item position.
      * @return ItemView type.
      */
-    internal fun getItemView(position: Int) =
+    private fun getItemView(position: Int) =
         if (state.hasExtraRow && position == itemCount - 1) {
             if (state.isAddError()) {
                 ItemView.ERROR
             } else {
                 ItemView.LOADING
             }
-        } else {
+        }
+        else {
             ItemView.POST
         }
 }

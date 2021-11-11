@@ -2,9 +2,9 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_post_nav_graph"
-    app:startDestination="@id/allPostListFragment">
+    app:startDestination="@id/postListFragment">
     <fragment
-        android:id="@+id/allPostListFragment"
-        android:name="com.capiter.android.all_posts_list.ui.AllPostListFragment"
+        android:id="@+id/postListFragment"
+        android:name="com.capiter.android.all_posts_list.ui.PostListFragment"
         android:label="Posts" />
 </navigation>

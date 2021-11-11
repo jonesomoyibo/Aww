@@ -2,7 +2,9 @@ package com.capiter.android.favourite_posts_list
 
 import android.app.Application
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.capiter.android.core.database.entities.Post
 import com.capiter.android.core.utils.CoreComponentProvider
@@ -13,6 +15,8 @@ import com.capiter.android.favourite_posts_list.di.DaggerFavouritePostComponent
 import com.capiter.android.favourite_posts_list.di.FavouritePostModule
 import com.capiter.android.ui.base.BaseFragment
 import com.capiter.android.ui.extensions.observe
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class FavouritePostsFragment :
@@ -33,6 +37,7 @@ class FavouritePostsFragment :
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.fetchData()
         observe(viewModel.data, ::onViewDataChange)
     }
 
@@ -71,9 +76,12 @@ class FavouritePostsFragment :
     /**
      * Observer view data change on [FavoritePostsViewModel].
      *
-     * @param viewData List of favorite characters.
+     * @param viewData List of favorite posts.
      */
     private fun onViewDataChange(viewData: List<Post>) {
+        Log.d("checker",viewData.toString())
         viewAdapter.submitList(viewData)
+
+
     }
 }

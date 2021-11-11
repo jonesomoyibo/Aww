@@ -1,6 +1,6 @@
 package com.capiter.android.all_posts_list.ui.paging
 
-import android.util.Log
+
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
 import com.capiter.android.all_posts_list.ui.model.PostItem
@@ -15,6 +15,7 @@ import javax.inject.Inject
 
 const val PAGE_INIT_ELEMENTS = ""
 const val PAGE_MAX_ELEMENTS = 20
+
 
 class PostPageDataSource @Inject constructor(
     val repository: AllPostListRepository,
@@ -40,11 +41,10 @@ class PostPageDataSource @Inject constructor(
     ) {
         networkState.postValue(NetworkState.Loading())
         scope.launch(
-            CoroutineExceptionHandler { _, throwable ->
+            CoroutineExceptionHandler { _, _ ->
                 retry = {
                     loadInitial(params, callback)
                 }
-//                Log.d("network-error",throwable.message!!)
                 networkState.postValue(NetworkState.Error())
             }
         ) {
@@ -53,6 +53,7 @@ class PostPageDataSource @Inject constructor(
                 limit = PAGE_MAX_ELEMENTS
             )
             val data = mapper.map(response)
+
             callback.onResult(data, null, response.data.after)
             networkState.postValue(NetworkState.Success(isEmptyResponse = data.isEmpty()))
         }

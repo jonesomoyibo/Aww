@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 
-val NAV_FRAGMENTS_ID = setOf(R.id.favouritePostsFragment, R.id.allPostListFragment)
+val NAV_FRAGMENTS_ID = setOf(R.id.favouritePostsFragment, R.id.postListFragment)
 
 /**
  * View model responsible for preparing and managing the data for [HomeFragment].

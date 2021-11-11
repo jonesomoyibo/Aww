@@ -1,6 +1,6 @@
 package com.capiter.android.all_posts_list.ui.paging
 
-import androidx.annotation.VisibleForTesting
+
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import com.capiter.android.all_posts_list.ui.model.PostItem

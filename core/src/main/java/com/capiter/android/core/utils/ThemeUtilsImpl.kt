@@ -10,23 +10,23 @@ import javax.inject.Inject
  * Utils implementation for application theme configuration.
  * @see ThemeUtils
  */
-class ThemeUtilsImpl @Inject constructor() : ThemeUtils {
+class ThemeUtilsImpl @Inject constructor() {
 
     /**
      * @see ThemeUtils.isDarkTheme
      */
-    override fun isDarkTheme(context: Context) = context.resources.configuration.uiMode and
+   fun isDarkTheme(context: Context) = context.resources.configuration.uiMode and
             Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
 
     /**
      * @see ThemeUtils.isLightTheme
      */
-    override fun isLightTheme(context: Context) = !isDarkTheme(context)
+    fun isLightTheme(context: Context) = !isDarkTheme(context)
 
     /**
      * @see ThemeUtils.setNightMode
      */
-    override fun setNightMode(forceNight: Boolean, delay: Long) {
+     fun setNightMode(forceNight: Boolean, delay: Long) {
         Handler().postDelayed(
             {
                 AppCompatDelegate.setDefaultNightMode(

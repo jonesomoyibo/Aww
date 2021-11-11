@@ -4,6 +4,8 @@ import android.app.Application
 import android.os.Bundle
 import android.view.View
 import androidx.paging.PagedList
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.capiter.android.all_posts_list.R
 import com.capiter.android.all_posts_list.databinding.FragmentPostsListBinding
 import com.capiter.android.all_posts_list.ui.adapter.AllPostListAdapter
@@ -11,15 +13,17 @@ import com.capiter.android.all_posts_list.ui.adapter.AllPostListAdapterState
 import com.capiter.android.all_posts_list.ui.di.AllPostListModule
 import com.capiter.android.all_posts_list.ui.di.DaggerAllPostListComponent
 import com.capiter.android.all_posts_list.ui.model.PostItem
+import com.capiter.android.core.database.entities.Post
 import com.capiter.android.core.utils.CoreComponentProvider
 import com.capiter.android.ui.base.BaseFragment
+import com.capiter.android.ui.extensions.gridLayoutManager
 import com.capiter.android.ui.extensions.linearLayoutManager
 import com.capiter.android.ui.extensions.observe
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
 
-class AllPostListFragment : BaseFragment<FragmentPostsListBinding,AllPostListViewModel>
+class PostListFragment : BaseFragment<FragmentPostsListBinding, PostListViewModel>
     (R.layout.fragment_posts_list) {
 
     @Inject
@@ -37,7 +41,8 @@ class AllPostListFragment : BaseFragment<FragmentPostsListBinding,AllPostListVie
         super.onViewCreated(view, savedInstanceState)
         observe(viewModel.state, ::onViewStateChange)
         observe(viewModel.data, ::onViewDataChange)
-//        observe(viewModel.event, ::onViewEvent)
+        observe(viewModel.favouriteIconViewState, ::onFavouriteIconViewStateChange)
+        observe(viewModel.addToFavouritePostsEvent, ::onViewEventChange)
     }
 
     /**
@@ -59,7 +64,8 @@ class AllPostListFragment : BaseFragment<FragmentPostsListBinding,AllPostListVie
         viewBinding.viewModel = viewModel
         viewBinding.includeList.postsList.apply {
             adapter = viewAdapter
-            layoutManager = linearLayoutManager
+            layoutManager = gridLayoutManager
+
         }
     }
 
@@ -81,43 +87,74 @@ class AllPostListFragment : BaseFragment<FragmentPostsListBinding,AllPostListVie
      *
      * @param viewState State of posts list.
      */
-    private fun onViewStateChange(viewState: AllPostsListViewState) {
+    private fun onViewStateChange(viewState: PostsListViewState) {
         when (viewState) {
-            is AllPostsListViewState.Loaded ->
+            is PostsListViewState.Loaded ->
                 viewAdapter.submitState(AllPostListAdapterState.Added)
-            is AllPostsListViewState.Loading->
+            is PostsListViewState.Loading ->
                 viewAdapter.submitState(AllPostListAdapterState.Loading)
-            is AllPostsListViewState.AddLoading ->
+            is PostsListViewState.AddLoading ->
                 viewAdapter.submitState(AllPostListAdapterState.AddLoading)
-            is AllPostsListViewState.AddError ->
+            is PostsListViewState.AddError ->
                 viewAdapter.submitState(AllPostListAdapterState.AddError)
-            is AllPostsListViewState.NoMoreElements ->
+            is PostsListViewState.NoMoreElements ->
                 viewAdapter.submitState(AllPostListAdapterState.NoMore)
-            is AllPostsListViewState.AddedToFavourite  -> {
-                Snackbar.make(
-                    requireView(),
-                    "Post added to favourite.",
-                    Snackbar.LENGTH_LONG
-                ).show()
-            }
 
-            else -> {}
+            else -> {
+            }
         }
     }
-//
-//    /**
-//     * Observer view event change on [CharactersListViewModel].
-//     *
-//     * @param viewEvent Event on characters list.
-//     */
-//    private fun onViewEvent(viewEvent: PostListViewEvent) {
-//        when (viewEvent) {
-//            is PostListViewEvent.OpenCharacterDetail ->
-//                findNavController().navigate(
-//                    CharactersListFragmentDirections
-//                        .actionCharactersListFragmentToCharacterDetailFragment(viewEvent.id)
-//                )
-//        }
-//    }
+
+    /**
+     * Observer view event change on [CharactersListViewModel].
+     *
+     * @param viewEvent Event on characters list.
+     */
+    private fun onViewEventChange(event: AddPostToFavouriteEvent) {
+        when (event) {
+            is AddPostToFavouriteEvent.AddPostToFavourites -> {
+                val postItem = event.post
+                viewModel.addPostToFavourites(
+                    Post(
+                        postItem.id,
+                        postItem.title,
+                        postItem.imageUrl,
+                        postItem.isVideo
+                    )
+                )
+            }
+        }
+    }
+
+
+/**
+ * Observer view state change on [AllPostsListViewModel].
+ *
+ * @param viewState State of posts list.
+ */
+private fun onFavouriteIconViewStateChange(favouriteIconViewState: FavouriteIconViewState) {
+    when (favouriteIconViewState) {
+        is FavouriteIconViewState.AddedToFavorite -> {
+            Snackbar.make(
+                requireView(),
+                "Post added to favourite.",
+                Snackbar.LENGTH_LONG
+            ).show()
+        }
+
+        is FavouriteIconViewState.AlreadyAddedToFavorite -> {
+            Snackbar.make(
+                requireView(),
+                "Post already added to favourite.",
+                Snackbar.LENGTH_LONG
+            ).show()
+        }
+
+
+        else -> {}
+    }
+}
+
+
 }
 

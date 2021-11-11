@@ -2,57 +2,49 @@ package com.capiter.android.all_posts_list.ui
 
 import com.capiter.android.ui.base.BaseViewState
 
-sealed class AllPostsListViewState: BaseViewState {
+sealed class PostsListViewState: BaseViewState {
 
     /**
      * Refreshing posts list.
      */
-    object Refreshing : AllPostsListViewState()
+    object Refreshing : PostsListViewState()
 
     /**
      * Loaded posts list.
      */
-    object Loaded : AllPostsListViewState()
+    object Loaded : PostsListViewState()
 
     /**
      * Loading posts list.
      */
-    object Loading : AllPostsListViewState()
+    object Loading : PostsListViewState()
 
     /**
      * Loading on add more elements into posts list.
      */
-    object AddLoading : AllPostsListViewState()
+    object AddLoading : PostsListViewState()
 
     /**
      * Empty posts list.
      */
-    object Empty : AllPostsListViewState()
+    object Empty : PostsListViewState()
 
     /**
      * Error on loading posts list.
      */
-    object Error : AllPostsListViewState()
+    object Error : PostsListViewState()
 
     /**
      * Error on add more elements into posts list.
      */
-    object AddError : AllPostsListViewState()
+    object AddError : PostsListViewState()
 
     /**
      * No more elements for adding into posts list.
      */
-    object NoMoreElements :AllPostsListViewState()
+    object NoMoreElements :PostsListViewState()
 
-    /**
-     * No more elements for adding into posts list.
-     */
-    object AddedToFavourite :AllPostsListViewState()
 
-    /**
-     * No more elements for adding into posts list.
-     */
-    object AlreadyAddedToFavourite :AllPostsListViewState()
 
     // ============================================================================================
     //  Public helpers methods
@@ -79,7 +71,6 @@ sealed class AllPostsListViewState: BaseViewState {
      */
     fun isLoading() = this is Loading
 
-    fun isAddToFavourite() = this is AddedToFavourite
 
     /**
      * Check if current view state is [AddLoading].

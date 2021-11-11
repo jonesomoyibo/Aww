@@ -3,11 +3,11 @@ package com.capiter.android.all_posts_list.ui.adapter.holders
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.RecyclerView
 import com.capiter.android.all_posts_list.databinding.ListItemErrorBinding
-import com.capiter.android.all_posts_list.ui.AllPostListViewModel
+import com.capiter.android.all_posts_list.ui.PostListViewModel
 import com.capiter.android.ui.base.BaseViewHolder
 
 /**
- * Class describes characters error view and metadata about its place within the [RecyclerView].
+ * Class describes posts  error view and metadata about its place within the [RecyclerView].
  *
  * @see BaseViewHolder
  */
@@ -20,9 +20,9 @@ class ErrorViewHolder(
     /**
      * Bind view data binding variables.
      *
-     * @param viewModel character list view model.
+     * @param viewModel POST list view model.
      */
-    fun bind(viewModel: AllPostListViewModel) {
+    fun bind(viewModel: PostListViewModel) {
         binding.viewModel = viewModel
         binding.executePendingBindings()
     }

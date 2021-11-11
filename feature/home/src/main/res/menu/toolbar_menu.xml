@@ -6,4 +6,5 @@
         android:title="@string/home_toolbar_theme"
         app:showAsAction="always"
         app:actionViewClass="com.capiter.android.home.menu.ToggleThemeCheckBox" />
+
 </menu>

@@ -1,9 +1,10 @@
 package com.capiter.android.core.database.daos
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import com.capiter.android.core.database.entities.Post
-
+import kotlinx.coroutines.flow.Flow
 
 
 @Dao
@@ -38,7 +39,7 @@ interface PostDao {
      * @return Favorite character if exist, otherwise null.
      */
     @Query("SELECT * FROM posts ")
-    fun getFavoritePosts(): LiveData<List<Post>>
+    fun getFavoritePosts(): Flow<List<Post>>
 
 
 

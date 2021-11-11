@@ -5,12 +5,12 @@ import com.capiter.android.ui.base.BaseViewState
 sealed class FavouriteStateViewState: BaseViewState {
 
     /**
-     * No favorite characters to display.
+     * No favorite posts to display.
      */
     object Empty :FavouriteStateViewState()
 
     /**
-     * Favorite characters displayed.
+     * Favorite posts displayed.
      */
     object Listed : FavouriteStateViewState()
 

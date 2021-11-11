@@ -6,7 +6,7 @@ data class Data(
     val after: String,
     val before: Any?,
     @SerializedName("children")
-    val posts: List<Post>,
+    val posts: List<Posts>,
     @SerializedName("dist")
     val count: Int,
     val geo_filter: String,

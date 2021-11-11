@@ -1,29 +1,27 @@
 package com.capiter.android.all_posts_list.ui.adapter
 
-import com.capiter.android.all_posts_list.ui.AllPostsListViewState
-
 
 sealed class AllPostListAdapterState(
     val hasExtraRow: Boolean
 ) {
 
     /**
-     * Listed the added characters into list.
+     * Listed the added posts into list.
      */
     object Added : AllPostListAdapterState(hasExtraRow = true)
 
     /**
-     * Loading for new characters to add into list.
+     * Loading for new posts to add into list.
      */
     object AddLoading : AllPostListAdapterState(hasExtraRow = true)
 
     /**
-     * Error on add new characters into list.
+     * Error on add new posts into list.
      */
     object AddError : AllPostListAdapterState(hasExtraRow = true)
 
     /**
-     * No more characters to add into list.
+     * No more posts to add into list.
      */
     object NoMore : AllPostListAdapterState(hasExtraRow = false)
 

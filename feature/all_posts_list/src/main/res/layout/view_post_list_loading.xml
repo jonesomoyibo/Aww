@@ -6,7 +6,7 @@
 
         <variable
             name="viewState"
-            type="com.capiter.android.all_posts_list.ui.AllPostsListViewState" />
+            type="com.capiter.android.all_posts_list.ui.PostsListViewState" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,6 +17,7 @@
         <ProgressBar
             android:layout_width="@dimen/all_posts_list_loading_size"
             android:layout_height="@dimen/all_posts_list_loading_size"
+            android:layout_gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

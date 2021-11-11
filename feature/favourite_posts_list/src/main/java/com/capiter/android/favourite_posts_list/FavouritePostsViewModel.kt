@@ -1,20 +1,18 @@
 package com.capiter.android.favourite_posts_list
 
 import androidx.annotation.VisibleForTesting
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.capiter.android.core.database.entities.Post
 import com.capiter.android.core.database.repositories.FavouritePostsRepository
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class FavouritePostsViewModel  @Inject constructor(
-    val favouritePostsRepository: FavouritePostsRepository
+    private val favouritePostsRepository: FavouritePostsRepository
 ) : ViewModel() {
 
-    val data = favouritePostsRepository.getFavoritePosts()
+     var data:MutableLiveData<List<Post>> = MutableLiveData()
     val state = Transformations.map(data) {
         if (it.isEmpty()) {
             FavouriteStateViewState.Empty
@@ -30,15 +28,18 @@ class FavouritePostsViewModel  @Inject constructor(
         }
     }
 
-    fun removeAllFavoritePost() {
+
+
+
+     fun fetchData() {
+
         viewModelScope.launch {
-            favouritePostsRepository.deleteAllFavouritePosts()
+            favouritePostsRepository.getFavoritePosts().collect {
+                data.postValue(it)
+            }
         }
+
+        }
+
     }
 
-
-
- fun getAllPosts(): LiveData<List<Post>> = favouritePostsRepository.getFavoritePosts()
-
-
-}

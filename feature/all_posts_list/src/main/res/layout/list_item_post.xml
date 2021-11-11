@@ -7,9 +7,13 @@
         <variable
             name="postItem"
             type="com.capiter.android.all_posts_list.ui.model.PostItem" />
+
+        <variable
+            name="viewState"
+            type="com.capiter.android.all_posts_list.ui.PostsListViewState" />
         <variable
             name="viewModel"
-            type="com.capiter.android.all_posts_list.ui.AllPostListViewModel" />
+            type="com.capiter.android.all_posts_list.ui.PostListViewModel" />
 
     </data>
 
@@ -21,60 +25,60 @@
         app:cardElevation="@dimen/all_posts_list_item_corner_radius">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            style="@style/AppTheme.SurfaceStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <androidx.appcompat.widget.AppCompatImageView
+            <ImageView
                 android:id="@+id/post_image"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/all_posts_list_item_size"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
                 android:contentDescription="@string/all_posts_list_item_image_content_description"
                 android:scaleType="centerCrop"
-                app:imageUrl="@{postItem.thumbnailUrl}"
+                app:imageUrl="@{postItem.imageUrl}"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
                 android:id="@+id/textView"
-                android:layout_width="0dp"
+                style="@style/TextAppearance.CardTitle"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="@{postItem.title}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                style="@style/TextAppearance.CardTitle"
+                app:layout_constraintEnd_toEndOf="@+id/post_image"
+                app:layout_constraintStart_toStartOf="@+id/post_image"
                 app:layout_constraintTop_toBottomOf="@+id/post_image" />
+
 
             <ImageView
                 android:id="@+id/favourite"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:onClick="@{() -> viewModel.addPostToFavorite(postItem)}"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="10dp"
+                android:onClick="@{() -> viewModel.emitAddPostToFavoriteEvent(postItem)}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/textView"
                 app:layout_constraintTop_toBottomOf="@+id/textView"
-                android:src="@{!viewModel.viewState.isAddToFavourite? @drawable/fav : @drawable/liked_fav}"
-
-
-                app:srcCompat="@drawable/add_to_favourite" />
-
-
+                app:layout_constraintVertical_bias="1.0"
+                app:srcCompat="@drawable/liked_fav" />
 
             <ImageView
                 android:id="@+id/post_image_view"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
+                android:backgroundTint="@android:color/transparent"
                 app:layout_constraintBottom_toBottomOf="@+id/post_image"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.551"
+                app:layout_constraintHorizontal_bias="0.56"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:visible="@{postItem.video}"
-                app:srcCompat="@drawable/play_icon" />
+                app:layout_constraintVertical_bias="0.63"
+                app:srcCompat="@drawable/play_icon"
+                app:visible="@{postItem.video}" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

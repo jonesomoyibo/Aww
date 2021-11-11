@@ -1,17 +1,18 @@
 package com.capiter.android.core.di.modules
 
-import com.capiter.android.core.utils.ThemeUtils
 import com.capiter.android.core.utils.ThemeUtilsImpl
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+
 import javax.inject.Singleton
 
+
 /**
-* Class that contributes to the object graph [CoreComponent].
-*
-* @see Module
-*/
+ * Class that contributes to the object graph [CoreComponent].
+ *
+ * @see Module
+ */
 @Module
 class UtilsModule {
 
@@ -23,8 +24,7 @@ class UtilsModule {
      */
     @Singleton
     @Provides
-     fun themeUtils(): ThemeUtils = ThemeUtilsImpl()
-
-
+   fun providesThemeUtils(): ThemeUtilsImpl
+   = ThemeUtilsImpl()
 
 }

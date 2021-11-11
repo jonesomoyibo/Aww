@@ -1,9 +1,8 @@
 package com.capiter.android.all_posts_list.ui.di
 
-import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.viewModelScope
-import com.capiter.android.all_posts_list.ui.AllPostListFragment
-import com.capiter.android.all_posts_list.ui.AllPostListViewModel
+import com.capiter.android.all_posts_list.ui.PostListFragment
+import com.capiter.android.all_posts_list.ui.PostListViewModel
 import com.capiter.android.all_posts_list.ui.adapter.AllPostListAdapter
 import com.capiter.android.all_posts_list.ui.model.PostItemMapper
 import com.capiter.android.all_posts_list.ui.paging.PostPageDataSource
@@ -17,7 +16,7 @@ import dagger.Provides
 @Module
 class AllPostListModule (
 
-    val fragment: AllPostListFragment
+    val fragment: PostListFragment
 ) {
 
     /**
@@ -33,7 +32,7 @@ class AllPostListModule (
         dataFactory: PostPageDataSourceFactory,
         favouritePostsRepository: FavouritePostsRepository
     ) = fragment.viewModel {
-        AllPostListViewModel(dataFactory,favouritePostsRepository)
+        PostListViewModel(dataFactory,favouritePostsRepository)
     }
 
     /**
@@ -44,7 +43,7 @@ class AllPostListModule (
      */
     @Provides
     fun providesPostsPageDataSource(
-        viewModel: AllPostListViewModel,
+        viewModel: PostListViewModel,
         repository: AllPostListRepository,
         mapper: PostItemMapper
     ) = PostPageDataSource(
@@ -72,7 +71,7 @@ class AllPostListModule (
     @FeatureScope
     @Provides
     fun providesCharactersListAdapter(
-        viewModel: AllPostListViewModel
+        viewModel: PostListViewModel
     ) = AllPostListAdapter(viewModel)
 
 

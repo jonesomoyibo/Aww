@@ -7,7 +7,7 @@
 
         <variable
             name="viewState"
-            type="com.capiter.android.all_posts_list.ui.AllPostsListViewState" />
+            type="com.capiter.android.all_posts_list.ui.PostsListViewState" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,11 +21,11 @@
             android:layout_height="match_parent"
             android:theme="@style/AppTheme.BackgroundStyle"
             app:itemDecorationSpacing="@{@dimen/all_posts_list_item_padding}"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="@integer/all_posts_list_spans"
             tools:listitem="@layout/list_item_post" />
 

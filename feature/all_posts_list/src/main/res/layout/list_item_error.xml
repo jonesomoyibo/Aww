@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.capiter.android.all_posts_list.ui.AllPostListViewModel" />
+            type="com.capiter.android.all_posts_list.ui.PostListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

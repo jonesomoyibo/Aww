@@ -1,5 +1,7 @@
 package com.capiter.android.core.network.responses
 
+import com.google.gson.annotations.SerializedName
+
 data class Post(
     val all_awardings: List<AllAwarding>,
     val allow_live_comments: Boolean,
@@ -103,7 +105,8 @@ data class Post(
     val treatment_tags: List<Any>,
     val ups: Int,
     val upvote_ratio: Double,
-    val url: String,
+    @SerializedName("url")
+    val imageUrl: String,
     val url_overridden_by_dest: String,
     val user_reports: List<Any>,
     val view_count: Any,

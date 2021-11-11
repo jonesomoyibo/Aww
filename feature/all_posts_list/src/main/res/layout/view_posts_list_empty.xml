@@ -6,7 +6,7 @@
 
         <variable
             name="viewState"
-            type="com.capiter.android.all_posts_list.ui.AllPostsListViewState" />
+            type="com.capiter.android.all_posts_list.ui.PostsListViewState" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

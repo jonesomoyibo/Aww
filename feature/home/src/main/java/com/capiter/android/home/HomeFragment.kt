@@ -8,11 +8,14 @@ import android.view.*
 import androidx.annotation.RequiresApi
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import com.capiter.android.core.utils.CoreComponentProvider
+import com.capiter.android.core.utils.ThemeUtilsImpl
 import com.capiter.android.home.databinding.FragmentHomeBinding
 import com.capiter.android.home.di.DaggerHomeComponent
 import com.capiter.android.home.di.HomeModule
+import com.capiter.android.home.menu.ToggleThemeCheckBox
 import com.capiter.android.ui.base.BaseFragment
 import com.capiter.android.ui.extensions.setupWithNavController
+import javax.inject.Inject
 
 
 /**
@@ -26,8 +29,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
     layoutId = R.layout.fragment_home
 ) {
 
-//    @Inject
-//    lateinit var themeUtils: ThemeUtils
+    @Inject
+    lateinit var themeUtils: ThemeUtilsImpl
 
     private val navGraphIds = listOf(
         R.navigation.navigation_post_favourite_nav_graph,
@@ -76,28 +79,28 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.toolbar_menu, menu)
 
-//        menu.findItem(R.id.menu_toggle_theme).apply {
-//            val actionView = this.actionView
-//            if (actionView is ToggleThemeCheckBox) {
-//                actionView.isChecked = themeUtils.isDarkTheme(requireContext())
-//                actionView.setOnCheckedChangeListener { _, isChecked ->
-//                    themeUtils.setNightMode(isChecked, DELAY_TO_APPLY_THEME)
-//                }
-//            }
-//        }
+        menu.findItem(R.id.menu_toggle_theme).apply {
+            val actionView = this.actionView
+            if (actionView is ToggleThemeCheckBox) {
+                actionView.isChecked = themeUtils.isDarkTheme(requireContext())
+                actionView.setOnCheckedChangeListener { _, isChecked ->
+                    themeUtils.setNightMode(isChecked, DELAY_TO_APPLY_THEME)
+                }
+            }
+        }
     }
 
     /**
      * Initialize dagger injection dependency graph.
      */
-    override fun onInitDependencyInjection() {
-        DaggerHomeComponent
-            .builder()
-            .coreComponent(CoreComponentProvider.coreComponent(requireContext().applicationContext as Application))
-            .homeModule(HomeModule(this))
-            .build()
-            .inject(this)
-    }
+  override fun onInitDependencyInjection() {
+       DaggerHomeComponent
+          .builder()
+          .coreComponent(CoreComponentProvider.coreComponent(requireContext().applicationContext as Application))
+           .homeModule(HomeModule(this))
+         .build()
+          .inject(this)
+   }
 
     /**
      * Initialize view data binding variables.
