@@ -7,6 +7,7 @@ import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import coil.load
+
 import com.capiter.android.ui.R
 import kotlin.random.Random
 

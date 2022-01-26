@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/post_search_view"
+
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="@string/all_posts_list_search_text"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="always|collapseActionView" />
     <item
         android:id="@+id/menu_toggle_theme"
         android:title="@string/home_toolbar_theme"
-        app:showAsAction="always"
+        app:showAsAction="ifRoom"
         app:actionViewClass="com.capiter.android.home.menu.ToggleThemeCheckBox" />
+
 
 </menu>

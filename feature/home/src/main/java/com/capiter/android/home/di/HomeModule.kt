@@ -1,6 +1,6 @@
 package com.capiter.android.home.di
 
-import com.capiter.android.core.di.scopes.FeatureScope
+import com.capiter.android.core.di.scopes.HomeScope
 import com.capiter.android.home.HomeFragment
 import com.capiter.android.home.HomeViewModel
 import com.capiter.android.ui.extensions.viewModel
@@ -24,8 +24,10 @@ class HomeModule(
      * @see Provides
      */
     @Provides
-    @FeatureScope
+    @HomeScope
     fun providesHomeViewModel() = fragment.viewModel {
         HomeViewModel()
     }
+
+
 }

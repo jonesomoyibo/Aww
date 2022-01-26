@@ -16,9 +16,9 @@
             <option value="$PROJECT_DIR$/common/view" />
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/feature" />
-            <option value="$PROJECT_DIR$/feature/all_posts_list" />
-            <option value="$PROJECT_DIR$/feature/favourite_posts_list" />
+            <option value="$PROJECT_DIR$/feature/favourite_posts" />
             <option value="$PROJECT_DIR$/feature/home" />
+            <option value="$PROJECT_DIR$/feature/posts_list" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

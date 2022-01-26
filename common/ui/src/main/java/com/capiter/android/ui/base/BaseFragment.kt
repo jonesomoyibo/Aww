@@ -12,12 +12,16 @@ import androidx.lifecycle.ViewModel
 import androidx.databinding.ViewDataBinding
 import javax.inject.Inject
 
-abstract class BaseFragment<B: ViewDataBinding,M:ViewModel>(
+abstract class
+BaseFragment<B: ViewDataBinding,M:ViewModel>(
     private val layoutId: Int):Fragment() {
 
     @Inject
     lateinit var viewModel: M
     lateinit var viewBinding: B
+
+
+
 
 
 
@@ -65,7 +69,6 @@ abstract class BaseFragment<B: ViewDataBinding,M:ViewModel>(
 
 
     fun requireCompatActivity(): AppCompatActivity {
-        requireActivity()
         val activity = requireActivity()
         if (activity is AppCompatActivity) {
             return activity

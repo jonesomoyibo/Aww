@@ -14,7 +14,15 @@ import kotlin.math.ceil
 *
 * @see RecyclerView.ItemDecoration
 */
-class RecyclerViewItemDecoration(
+class
+
+
+
+
+
+
+
+RecyclerViewItemDecoration(
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     internal val spacingPx: Int
 ) : RecyclerView.ItemDecoration() {

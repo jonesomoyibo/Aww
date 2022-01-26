@@ -41,8 +41,8 @@ dependencies {
 
 
     implementation project(path: ':feature:home')
-    implementation project(path: ':feature:all_posts_list')
-    implementation project(path: ':feature:favourite_posts_list')
+    implementation project(path: ':feature:posts_list')
+    implementation project(path: ':feature:favourite_posts')
 
     //Dagger 2
     implementation "com.google.dagger:dagger-android:2.39.1"

@@ -12,7 +12,8 @@ interface AwwServices {
     suspend fun getAllPosts(
         @Query("t") t: String = "all",
         @Query("after") nextPage:String?,
-        @Query("limit") limit: Int
+        @Query("limit") limit: Int,
+        @Query("q") query:String = ""
     ): DataResponse
 
     @GET("/search.json")

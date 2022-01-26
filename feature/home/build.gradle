@@ -39,8 +39,8 @@ android {
 
 dependencies {
     implementation project(path: ':core')
-    implementation project(path: ':feature:all_posts_list')
-    implementation project(path: ':feature:favourite_posts_list')
+    implementation project(path: ':feature:posts_list')
+    implementation project(path: ':feature:favourite_posts')
 
     //Dagger 2
     implementation "com.google.dagger:dagger-android:2.39.1"
@@ -57,7 +57,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.3.1'
     implementation 'com.google.android.material:material:1.4.0'
-    testImplementation 'junit:junit:4.+'
+    testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }

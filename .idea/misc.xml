@@ -21,7 +21,7 @@
         <entry key="feature/all_posts_list/src/main/res/layout/list_item_character.xml" value="0.22" />
         <entry key="feature/all_posts_list/src/main/res/layout/list_item_error.xml" value="0.21" />
         <entry key="feature/all_posts_list/src/main/res/layout/list_item_loading.xml" value="0.22" />
-        <entry key="feature/all_posts_list/src/main/res/layout/list_item_post.xml" value="0.1" />
+        <entry key="feature/all_posts_list/src/main/res/layout/list_item_post.xml" value="0.18" />
         <entry key="feature/all_posts_list/src/main/res/layout/view_characters_list_error.xml" value="0.22" />
         <entry key="feature/all_posts_list/src/main/res/layout/view_characters_list_loading.xml" value="0.1" />
         <entry key="feature/all_posts_list/src/main/res/layout/view_post_list_empty.xml" value="0.1" />
@@ -29,6 +29,9 @@
         <entry key="feature/all_posts_list/src/main/res/layout/view_posts_list.xml" value="0.1" />
         <entry key="feature/all_posts_list/src/main/res/layout/view_posts_list_empty.xml" value="0.13764044943820225" />
         <entry key="feature/all_posts_list/src/main/res/layout/view_posts_list_error.xml" value="0.1962962962962963" />
+        <entry key="feature/favourite_posts/src/main/res/layout/list_item_post_favourite.xml" value="0.11680121089808275" />
+        <entry key="feature/favourite_posts/src/main/res/layout/view_post_favourite_list_empty.xml" value="0.11680121089808275" />
+        <entry key="feature/favourite_posts/src/main/res/layout/view_posts_favourite_list.xml" value="0.1" />
         <entry key="feature/favourite_posts_list/src/main/res/drawable/play_icon.xml" value="0.13229166666666667" />
         <entry key="feature/favourite_posts_list/src/main/res/layout/fragment_favourite.xml" value="0.1" />
         <entry key="feature/favourite_posts_list/src/main/res/layout/fragment_favourite_posts.xml" value="0.18" />
@@ -48,6 +51,13 @@
         <entry key="feature/home/src/main/res/menu/bottom_menu.xml" value="0.18" />
         <entry key="feature/home/src/main/res/menu/bottom_menu_bar.xml" value="0.1" />
         <entry key="feature/home/src/main/res/menu/toolbar_menu.xml" value="0.18" />
+        <entry key="feature/posts_list/src/main/res/layout/fragment_post_detail.xml" value="0.11427850655903128" />
+        <entry key="feature/posts_list/src/main/res/layout/list_item_error.xml" value="0.11680121089808275" />
+        <entry key="feature/posts_list/src/main/res/layout/list_item_loading.xml" value="0.11680121089808275" />
+        <entry key="feature/posts_list/src/main/res/layout/list_item_post.xml" value="0.1" />
+        <entry key="feature/posts_list/src/main/res/layout/view_post_list_loading.xml" value="0.11680121089808275" />
+        <entry key="feature/posts_list/src/main/res/layout/view_posts_list_empty.xml" value="0.11680121089808275" />
+        <entry key="feature/posts_list/src/main/res/layout/view_posts_list_error.xml" value="0.22" />
         <entry key="features/src/main/res/drawable/play_icon.xml" value="0.15572916666666667" />
         <entry key="features/src/main/res/drawable/search_view_rounded.xml" value="0.1935185185185185" />
         <entry key="features/src/main/res/drawable/shape_progress_dialog.xml" value="0.15572916666666667" />

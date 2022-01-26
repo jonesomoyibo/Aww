@@ -1,12 +1,19 @@
 package com.capiter.android.home
 
+//import com.capiter.android.home.di.DaggerHomeComponent
 import android.app.Application
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
-import android.view.*
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.View
 import androidx.annotation.RequiresApi
+import androidx.appcompat.widget.SearchView
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
+import com.capiter.android.posts_list.ui.PostListFragment
+import com.capiter.android.posts_list.ui.PostListViewModel
+import com.capiter.android.posts_list.ui.di.AllPostListModule
+import com.capiter.android.posts_list.ui.di.DaggerAllPostListComponent
 import com.capiter.android.core.utils.CoreComponentProvider
 import com.capiter.android.core.utils.ThemeUtilsImpl
 import com.capiter.android.home.databinding.FragmentHomeBinding
@@ -25,12 +32,16 @@ import javax.inject.Inject
  */
 
 private const val DELAY_TO_APPLY_THEME = 1000L
+
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
     layoutId = R.layout.fragment_home
 ) {
 
     @Inject
     lateinit var themeUtils: ThemeUtilsImpl
+
+//    @Inject
+//    lateinit var postsViewModel: PostListViewModel
 
     private val navGraphIds = listOf(
         R.navigation.navigation_post_favourite_nav_graph,
@@ -51,7 +62,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
         setupToolbar()
         if (savedInstanceState == null) {
             setupBottomNavigationBar()
-            Log.d("Jones","Got here")
         }
     }
 
@@ -88,19 +98,61 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
                 }
             }
         }
+
+        menu.findItem(R.id.post_search_view).apply {
+            when (val actionView = this.actionView) {
+                is SearchView -> {
+                    actionView.apply {
+                        queryHint = requireContext()
+                            .applicationContext
+                            .getString(R.string.home_toolbar_search_view_query_hint)
+
+                        setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                            override fun onQueryTextSubmit(query: String?): Boolean {
+//                                if (query != null) {
+//                                    postsViewModel.searchForPost(query)
+//                                }
+//                                return true
+                                TODO("Not yet implemented")
+                            }
+
+                            override fun onQueryTextChange(newText: String?): Boolean {
+                                TODO("Not yet implemented")
+                            }
+
+                        })
+
+                    }
+
+                }
+            }
+        }
     }
+
 
     /**
      * Initialize dagger injection dependency graph.
      */
-  override fun onInitDependencyInjection() {
-       DaggerHomeComponent
-          .builder()
-          .coreComponent(CoreComponentProvider.coreComponent(requireContext().applicationContext as Application))
-           .homeModule(HomeModule(this))
-         .build()
-          .inject(this)
-   }
+    override fun onInitDependencyInjection() {
+
+
+
+
+
+        DaggerHomeComponent
+            .builder()
+            .coreComponent(
+                CoreComponentProvider
+                    .coreComponent(
+                        requireContext()
+                            .applicationContext as Application
+                    )
+            )
+            .homeModule(HomeModule(this))
+            .build()
+            .inject(this)
+
+    }
 
     /**
      * Initialize view data binding variables.
@@ -119,7 +171,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
     private fun setupToolbar() {
         setHasOptionsMenu(true)
         requireCompatActivity().setSupportActionBar(viewBinding.toolbar)
-        Log.d("Jones","Tool bar,Got here")
+
     }
 
     /**
@@ -142,4 +194,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
             }
         )
     }
+
+
+
 }

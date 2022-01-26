@@ -9,8 +9,8 @@ dependencyResolutionManagement {
 rootProject.name = "Aww"
 include ':app'
 include ':core'
-include ':feature:all_posts_list'
-include ':feature:favourite_posts_list'
+include ':feature:posts_list'
+include ':feature:favourite_posts'
 include ':feature:home'
 include ':common:ui'
 include ':common:view'

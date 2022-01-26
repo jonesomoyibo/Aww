@@ -10,7 +10,9 @@ import androidx.databinding.BindingAdapter
 var View.visible
     get() = visibility == View.VISIBLE
     set(value) {
-        visibility = if (value) View.VISIBLE else View.GONE
+        visibility = if (value) View.
+
+        VISIBLE else View.GONE
     }
 
 /**

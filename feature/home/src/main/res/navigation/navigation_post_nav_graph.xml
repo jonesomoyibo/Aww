@@ -5,6 +5,6 @@
     app:startDestination="@id/postListFragment">
     <fragment
         android:id="@+id/postListFragment"
-        android:name="com.capiter.android.all_posts_list.ui.PostListFragment"
+        android:name="posts_list.ui.PostListFragment"
         android:label="Posts" />
 </navigation>
